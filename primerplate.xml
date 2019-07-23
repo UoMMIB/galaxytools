@@ -1,5 +1,5 @@
 <tool id="primerplate" name="PrimerPlate" version="0.1.0">
-    <description>enzyme sequence selection from reaction template</description>
+    <description>get primer file convert into primer plate for worklist generation.</description>
     <command detect_errors="exit_code"><![CDATA[
         python $__tool_directory__/primerPlate.py $input1 $output1 
     ]]></command>

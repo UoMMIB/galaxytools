@@ -43,8 +43,6 @@ def arguments():
                         help='Output csv file.')
     return parser
 
-def 
-
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
