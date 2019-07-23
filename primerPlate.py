@@ -46,13 +46,13 @@ def arguments():
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    if os.path.exists(arg.infile):
+    if os.path.exists(args.infile):
         try:
-            df = pd.read_csv(arg.infile)
+            df = pd.read_csv(args.infile)
         except:
             raise Exception('Unkown file format!')
         well = readPlate(df)
-        makePlate(well,arg.outfile)
+        makePlate(well,args.outfile)
     else:
         raise Exception('File not found')
         
