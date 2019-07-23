@@ -15,13 +15,17 @@ def readPlate(df):
     well = {}
     wp = 'Well Position'
     sn = 'Sequence Name'
+    sn2 = 'Name'
     try: 
-        wp in df.columns and sn in df.columns
+        wp in df.columns and (sn in df.columns or sn2 in df.columns)
     except:
         raise Exception('Unknown columns')
     for ix in df.index:
-        pos = df.loc[ix,'Well Position']
-        seq = df.loc[ix,'Sequence Name']
+        pos = df.loc[ix,wp]
+        try:
+            seq = df.loc[ix,sn]
+        except:
+            seq = df.loc[ix,sn2]
         part = seq.split('_')[0]
         well[ pos ] = part
     return well
