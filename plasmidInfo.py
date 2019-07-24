@@ -18,6 +18,7 @@ def getSBCfile(f):
     pwd = os.getenv('SBCDATA_PASSWORD')
 
     url = os.path.join(host, f)
+    print('URL',url)
     r = requests.get(url, auth=HTTPBasicAuth(user,pwd))
     return r.text
 
