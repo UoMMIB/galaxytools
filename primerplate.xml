@@ -1,7 +1,11 @@
 <tool id="primerplate" name="PrimerPlate" version="0.1.0">
     <description>get primer file convert into primer plate for worklist generation.</description>
     <command detect_errors="exit_code"><![CDATA[
-        python3 $__tool_directory__/primerPlate.py $input1 $output1 
+        python3 $__tool_directory__/primerPlate.py $input1 
+        #for $q in $queries
+            ${q.input2}
+        #end for
+        $output1 
     ]]></command>
     <inputs>
         <param type="data" name="input1" format="csv" />
