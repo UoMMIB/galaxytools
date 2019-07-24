@@ -1,7 +1,7 @@
 <tool id="plasmidinfo" name="PlasmidInfo" version="0.1.0">
     <description>get plasmid info for the requested design.</description>
     <command detect_errors="exit_code"><![CDATA[
-        python3 $__tool_directory__/primerInfo.py -i $design1 
+        python3 $__tool_directory__/plasmidInfo.py -i $design1 
         -o $output1 
     ]]></command>
     <inputs>
