@@ -54,8 +54,14 @@ def makePlate(wells, outfile):
         cw = csv.writer( h )
         cw.writerow( ['well','id'] )
         firstWell = True
+        done = set()
         for well in wells:
             for pos in sorted( well,key = lambda x: sortWell(x) ):
+                part = well[pos]
+                if part not in done:
+                    done.add( part )
+                else:
+                    continue
                 if not firstWell:
                     npos = nextPos( last )
                 else:
