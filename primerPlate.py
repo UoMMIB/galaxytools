@@ -41,22 +41,23 @@ def makePlate(well, outfile):
 
 def arguments():
     parser = argparse.ArgumentParser(description='Read list of primers and output primer plate. Pablo Carbonell, SYNBIOCHEM, 2019')
-    parser.add_argument('infile', 
+    parser.add_argument('-i', '--input', action='append', 
                         help='Input csv file.')
-    parser.add_argument('outfile', 
+    parser.add_argument('-o', '--output', 
                         help='Output csv file.')
     return parser
 
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    if os.path.exists(args.infile):
-        try:
-            df = pd.read_csv(args.infile)
-        except:
-            raise Exception('Unkown file format!')
-        well = readPlate(df)
-        makePlate(well,args.outfile)
-    else:
-        raise Exception('File not found')
+    for infile in args.i:
+        if os.path.exists(infile):
+            try:
+                df = pd.read_csv(infile)
+            except:
+                raise Exception('Unkown file format!')
+            well = readPlate(df)
+            makePlate(well,args.o)
+        else:
+            raise Exception('File not found')
         
