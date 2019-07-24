@@ -36,39 +36,47 @@ def rowCol( pos ):
     col = int( re.search('(\d+)$', pos).group() )
     return (row,col)
 
-def sortWell( pos ):
-    return tuple( reversed( rowCol(pos) ) )
-    return rowCol(pos) 
+def sortWell( pos, byRow=True ):
+    if byRow:
+        return tuple( reversed( rowCol(pos) ) )
+    else:
+        return rowCol(pos) 
 
 def nextPos( pos ):
     row, col = rowCol( pos )
-    if col < 8:
-        npos = row+str(col+1)
+    if ord(row) < ord('H'):
+        npos = chr( ord(row)+1 ) + str(col)
     else:
-        npos = chr( ord(row)+1 ) + str(1)
+        npos = 'A' + str(col+1)
     return npos
 
 def makePlate(wells, outfile):
     """ Take the first plate as it is and continue moving in the plate from there """
+    plate = {}
+    firstWell = True
+    done = set()
+    for well in wells:
+        for pos in sorted( well,key = lambda x: sortWell(x) ):
+            part = well[pos]
+            if part not in done:
+                done.add( part )
+            else:
+                continue
+            if not firstWell:
+                npos = nextPos( last )
+            else:
+                npos = pos
+            plate[npos] = well[pos]+'_P'
+            last = npos
+        if firstWell:
+            last = sorted(well,key=lambda x: sortWell(x) )[-1]
+            firstWell = False
+
     with open(outfile,'w') as h:
         cw = csv.writer( h )
         cw.writerow( ['well','id'] )
-        firstWell = True
-        done = set()
-        for well in wells:
-            for pos in sorted( well,key = lambda x: sortWell(x) ):
-                part = well[pos]
-                if part not in done:
-                    done.add( part )
-                else:
-                    continue
-                if not firstWell:
-                    npos = nextPos( last )
-                else:
-                    npos = pos
-                cw.writerow( [npos,well[pos]+'_P'] )
-                last = npos
-            firstWell = False
+        for pos in sorted( plate,key= lambda x: sortWell(x,byRow=False) ):
+            cw.writerow( [pos, plate[pos] ] )
     return
         
 
