@@ -10,6 +10,7 @@ import argparse
 import pandas as pd
 import csv
 import os
+import re
 
 def readPlate(df):
     well = {}
@@ -30,12 +31,38 @@ def readPlate(df):
         well[ pos ] = part
     return well
 
-def makePlate(well, outfile):
+def rowCol( pos ):
+    row = re.search('^(\D+)', pos).group()
+    col = int( re.search('(\d+)$', pos).group() )
+    return (row,col)
+
+def sortWell( pos ):
+    return tuple( reversed( rowCol(pos) ) )
+    return rowCol(pos) 
+
+def nextPos( pos ):
+    row, col = rowCol( pos )
+    if col < 8:
+        npos = row+str(col+1)
+    else:
+        npos = chr( ord(row)+1 ) + str(1)
+    return npos
+
+def makePlate(wells, outfile):
+    """ Take the first plate as it is and continue moving in the plate from there """
     with open(outfile,'w') as h:
         cw = csv.writer( h )
         cw.writerow( ['well','id'] )
-        for col in sorted( well ):
-            cw.writerow( [col,well[col]+'_P'] )
+        firstWell = True
+        for well in wells:
+            for pos in sorted( well,key = lambda x: sortWell(x) ):
+                if not firstWell:
+                    npos = nextPos( last )
+                else:
+                    npos = pos
+                cw.writerow( [npos,well[pos]+'_P'] )
+                last = npos
+            firstWell = False
     return
         
 
@@ -50,14 +77,15 @@ def arguments():
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    for infile in args.i:
+    wells = []
+    for infile in args.input:
         if os.path.exists(infile):
             try:
                 df = pd.read_csv(infile)
             except:
                 raise Exception('Unkown file format!')
-            well = readPlate(df)
-            makePlate(well,args.o)
+            wells.append ( readPlate(df) )
         else:
             raise Exception('File not found')
+    makePlate(wells,args.output)
         
