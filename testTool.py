@@ -32,7 +32,7 @@ def outHTML(outFile, outPath):
         h.write(output)
     
     if not os.path.exists(outPath):
-       os.mkdirs( outPath )
+       os.makedirs( outPath )
     r = requests.get('https://pbs.twimg.com/profile_images/607846881331412992/stXUAIwe_400x400.png')
 
     open(outfig,'wb').write(r.content)
