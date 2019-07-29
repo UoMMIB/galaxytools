@@ -4,6 +4,6 @@
         python3 $__tool_directory__/testTool.py -o $output1 -p $output1.extra_files_path
     ]]></command>
     <outputs>
-        <data name="output1" format="html" label="myToolOutput_${tool_name}.html"/>
+        <data name="output1" format="html" label="output.html"/>
     </outputs>
 </tool>
