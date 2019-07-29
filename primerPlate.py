@@ -17,8 +17,9 @@ def readPlate(df):
     wp = 'Well Position'
     sn = 'Sequence Name'
     sn2 = 'Name'
+    sequence = 'Sequence'
     try: 
-        wp in df.columns and (sn in df.columns or sn2 in df.columns)
+        wp in df.columns and (sn in df.columns or sn2 in df.columns) and sequence in df.columns
     except:
         raise Exception('Unknown columns')
     for ix in df.index:
@@ -71,7 +72,8 @@ def makePlate(wells, outfile):
         if firstWell:
             last = sorted(well,key=lambda x: sortWell(x) )[-1]
             firstWell = False
-
+    import pdb
+    pdb.set_trace()
     with open(outfile,'w') as h:
         cw = csv.writer( h )
         cw.writerow( ['well','id'] )
@@ -85,6 +87,8 @@ def arguments():
     parser.add_argument('-i', '--input', action='append', 
                         help='Input csv file.')
     parser.add_argument('-o', '--output', 
+                        help='Output csv file.')
+    parser.add_argument('-x', '--plates', 
                         help='Output csv file.')
     return parser
 
