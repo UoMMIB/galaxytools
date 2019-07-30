@@ -1,13 +1,7 @@
 <tool id="primertool" name="PrimerTool" version="0.1.0">
     <description>generate primer list from list of plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
-        python3 $__tool_directory__/primerTool.py 
-	-enzymes $input4 -temp $input5
-	#if $input_type == 'true':
-	   -plate $input6 
-	#end if 
-	-plasmids $input7
-	-output $output1
+        echo "$ICE_USERNAME" > $output1
     ]]></command>
     <inputs>
     	<param name="input4" type="text" label="Restriction enzymes" value="MlyI"
