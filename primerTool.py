@@ -17,7 +17,7 @@ def arguments():
     parser = argparse.ArgumentParser(description='Read list of primers and output primer plate. Pablo Carbonell, SYNBIOCHEM, 2019')
     parser.add_argument('-iceServer', default="http://ice.synbiochem.co.uk",
                         help='ICE server url.')
-    parser.add_argument('-iceUser', default=os.getenv('ICE_USER'), 
+    parser.add_argument('-iceUser', default=os.getenv('ICE_USERNAME'), 
                         help='ICE user.')
     parser.add_argument('-icePass', default=os.getenv('ICE_PASSWORD'),
                         help='ICE password.')
