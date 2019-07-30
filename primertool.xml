@@ -14,7 +14,12 @@
     	<param name="input4" type="text" label="Restriction enzymes" value="MlyI"
 	       help="Comma separated restriction enzymes" />
     	<param name="input5" type="float" label="Melting temperature" value="60" help="Melting temperature" />
-    	<param name="input6" type="data" label="Existing plate file" help="Existing plate file" format="csv"/>
+	<conditional name="input_type">
+	  <param name="input_type_selector" type="boolean" label="Input existing plate file" />
+	  <when value="true">
+    	    <param name="input6" type="data" label="Existing plate file" help="Existing plate file" format="csv"/>
+	  </when>
+	</conditional>
     	<param name="input7" type="data" label="Plasmids" help="Plasmid csv file" format="csv"/>
     </inputs>
     <outputs>
