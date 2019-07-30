@@ -40,7 +40,6 @@ if __name__ == '__main__':
     os.chdir(os.path.join( os.path.dirname(__file__), 'sbc-assembly') )
     cmd = ["python", 'assembly/app/lcr2/primers.py', args.iceServer, args.iceUser,
            args.icePass, args.enzymes, args.temp]
-    cmd.append( '-plate' )
     if args.plate is not None:
         cmd.append( args.plate )
     else:
