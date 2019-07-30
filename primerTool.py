@@ -29,10 +29,13 @@ def arguments():
                         help='Existing plate.')
     parser.add_argument('-plasmids', 
                         help='Plasmid csv file.')
+    parser.add_argument('-output', 
+                        help='Output csv file.')
     return parser
 
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    print(args.iceUser)
+    with open (args.output,'w') as handler:
+        csv.writer(handler).writerow(args.iceUser)
         
