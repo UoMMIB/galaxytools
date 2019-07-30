@@ -9,11 +9,6 @@
 	-plasmids $input7 
     ]]></command>
     <inputs>
-      <!--
-    	<param name="input1" type="text" label="ICE server" value="http:///ice.synbiochem.co.uk" help="ICE server" />
-    	<param name="input2" type="text" label="ICE user" value="" help="ICE user" />
-    	<param name="input3" type="text" label="ICE password" value="" help="ICE pass" />
-	-->
     	<param name="input4" type="text" label="Restriction enzymes" value="MlyI"
 	       help="Comma separated restriction enzymes" />
     	<param name="input5" type="float" label="Melting temperature" value="60" help="Melting temperature" />
