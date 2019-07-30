@@ -47,7 +47,7 @@ if __name__ == '__main__':
     df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
     icelist = icelist[0]
-    for ice in icelist:
+    for ice in [icelist]:
         cmd.append( ice )
     subprocess.call( cmd )
     outfile1 = 'primer_1_primer_phospho.csv'
