@@ -45,9 +45,11 @@ if __name__ == '__main__':
     else:
         cmd.append( 'None' )
     df = pd.read_csv(args.plasmids)
-    icelist = ' '.join( [str(x) for x in df['ICE']] )
-    cmd.append( icelist )
-    subprocess.Popen( cmd )
+    icelist = [str(x) for x in df['ICE']]
+    icelist = icelist[0]
+    for ice in icelist:
+        cmd.append( ice )
+    subprocess.call( cmd )
     outfile1 = 'primer_1_primer_phospho.csv'
     outfile2 = 'primer_1_primer_nonphospho.csv'
     if os.path.exists( outfile1 ):
