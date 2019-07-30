@@ -1,7 +1,7 @@
 <tool id="primertool" name="PrimerTool" version="0.1.0">
     <description>generate primer list from list of plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
-        echo "$ICE_USERNAME" > $output1
+        echo "$ICE_SERVER" > $output1
     ]]></command>
     <inputs>
     	<param name="input4" type="text" label="Restriction enzymes" value="MlyI"
