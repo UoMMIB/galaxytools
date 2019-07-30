@@ -1,9 +1,13 @@
 <tool id="primertool" name="PrimerTool" version="0.1.0">
     <description>generate primer list from list of plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
-        python3 $__tool_directory__/primerTool.py 
-	# -iceServer $input1 -iceUser $input2 -icePass $input3 
-	-enzymes $input4 -temp $input5 -plate $input6 -plasmids $input7 
+	cd sbc-assembly
+	export PYTHONPATH=$PYTHONPATH:.; 
+	#if $input_type == 'true'
+	python assembly/app/lcr2/primers.py $ICE_SERVER $ICE_USER $ICE_PASSWORD $input4 $input5 $input6 $input7
+	#else
+	echo "python assembly/app/lcr2/primers.py $ICE_SERVER $ICE_USER $ICE_PASSWORD $input4 $input5 None $input7"
+	#end if
     ]]></command>
     <inputs>
       <!--
