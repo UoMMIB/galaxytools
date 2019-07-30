@@ -2,7 +2,6 @@
     <description>generate primer list from list of plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
 	cd sbc-assembly
-	export PYTHONPATH=$PYTHONPATH:.; 
 	#if $input_type == 'true'
 	python assembly/app/lcr2/primers.py $ICE_SERVER $ICE_USER $ICE_PASSWORD $input4 $input5 $input6 $input7
 	#else
