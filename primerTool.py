@@ -11,7 +11,8 @@ import pandas as pd
 import csv
 import os
 import re
-
+import subprocess
+import shutil
 
 def arguments():
     parser = argparse.ArgumentParser(description='Read list of primers and output primer plate. Pablo Carbonell, SYNBIOCHEM, 2019')
@@ -36,6 +37,23 @@ def arguments():
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    with open (args.output,'w') as handler:
-        csv.writer(handler).writerow(args.iceUser)
+    os.chdir(os.path.join( os.path.dirname(__file__), 'sbc-assembly') )
+    cmd = ["python", 'assembly/app/lcr2/primers.py', args.iceServer, args.iceUser, args.icePass,
+           args.enzymes, args.temp]
+    if args.plate is not None:
+        cmd.append( args.plate )
+    else:
+        cmd.append( 'None' )
+    df = pd.read_csv(args.plasmids)
+    icelist = ' '.join( df['ICE'] )
+    cmd.append( icelist )
+    subprocess.Popen( cmd )
+    outfile1 = 'primer_1_primer_phospho.csv'
+    outfile2 = 'primer_1_primer_nonphospho.csv'
+    if os.path.exists( outfile1 ):
+        shutil.copyfile( outfile1, args.output )
+        os.unlink( outfile1 )
+    if os.path.exists( outfile2 ):
+        os.unlink( outfile2 )
+    os.chdir( '..' )
         
