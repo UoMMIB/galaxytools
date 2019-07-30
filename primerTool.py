@@ -38,14 +38,15 @@ if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
     os.chdir(os.path.join( os.path.dirname(__file__), 'sbc-assembly') )
-    cmd = ["python", 'assembly/app/lcr2/primers.py', args.iceServer, args.iceUser, args.icePass,
-           args.enzymes, args.temp]
+    cmd = ["python", 'assembly/app/lcr2/primers.py', args.iceServer, args.iceUser,
+           args.icePass, args.enzymes, args.temp]
+    cmd.append( '-plate' )
     if args.plate is not None:
         cmd.append( args.plate )
     else:
         cmd.append( 'None' )
     df = pd.read_csv(args.plasmids)
-    icelist = ' '.join( df['ICE'] )
+    icelist = ' '.join( [str(x) for x in df['ICE']] )
     cmd.append( icelist )
     subprocess.Popen( cmd )
     outfile1 = 'primer_1_primer_phospho.csv'
