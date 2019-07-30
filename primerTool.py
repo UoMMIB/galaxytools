@@ -34,4 +34,5 @@ def arguments():
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
+    print(arg.iceUser)
         
