@@ -21,7 +21,6 @@ def configureTool(args):
        os.makedirs( args.tempFolder )
     script = os.path.join( args.tempFolder, 'job.sh' )
     log = os.path.join( args.tempFolder, 'log.sh' )
-    if args.plate is not None:
     df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
     icelist = ' '.join( icelist )
