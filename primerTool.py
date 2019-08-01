@@ -23,7 +23,7 @@ def configureTool(args):
         plate = args.plate 
     else:
         plate =  'None' 
-            df = pd.read_csv(args.plasmids)
+        df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
     icelist = ' '.join( icelist[0] )
     with open( template ) as hin, open( script, 'w' ) as hout:
