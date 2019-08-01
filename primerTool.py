@@ -53,7 +53,7 @@ def arguments():
                         help='Plasmid csv file.')
     parser.add_argument('-output', 
                         help='Output csv file.')
-    parser.add_argument('-tempFolder'
+    parser.add_argument('-tempFolder',
                         help='Tool temporary folder.')
     return parser
 
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     script, logout = configureTool( args )
     print('Running primers script...')
-    subprocess.call(( "bash "+script, shell=True, stdout=logout, stderr=logout )
+    subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
     os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
     outfile1 = 'primer_1_primer_phospho.csv'
