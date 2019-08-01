@@ -32,7 +32,7 @@ def configureTool(args):
         for line in hin:
             line = re.sub( '{{enzymes}}', args.enzymes, line )
             line = re.sub( '{{temp}}', args.temp, line )
-            line = re.sub( '{{plates}}', plates, line )
+            line = re.sub( '{{plates}}', plate, line )
             line = re.sub( '{{plasmids}}', icelist, line )
             hout.write( line )
     return script, log
