@@ -27,7 +27,7 @@ def configureTool(args):
         plate =  'None' 
         df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
-    icelist = ' '.join( icelist[0] )
+    icelist = ' '.join( [ icelist[0] ] )
     with open( template ) as hin, open( script, 'w' ) as hout:
         for line in hin:
             line = re.sub( '{{enzymes}}', args.enzymes, line )
@@ -62,7 +62,8 @@ def arguments():
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    script, logout = configureTool( args )
+    script, log = configureTool( args )
+    logout = open(log, 'w')
     print('Running primers script...')
     subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
