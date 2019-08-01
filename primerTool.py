@@ -30,10 +30,10 @@ def configureTool(args):
     icelist = ' '.join( icelist[0] )
     with open( template ) as hin, open( script, 'w' ) as hout:
         for line in hin:
-            line = re.sub( '{{enzymes}}', args.enzymes )
-            line = re.sub( '{{temp}}', args.temp )
-            line = re.sub( '{{plates}}', plates )
-            line = re.sub( '{{plasmids}}', icelist )
+            line = re.sub( '{{enzymes}}', args.enzymes, line )
+            line = re.sub( '{{temp}}', args.temp, line )
+            line = re.sub( '{{plates}}', plates, line )
+            line = re.sub( '{{plasmids}}', icelist, line )
             hout.write( line )
     return script, log
 
