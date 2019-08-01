@@ -16,7 +16,7 @@ import shutil
 
 def arguments():
     parser = argparse.ArgumentParser(description='Read list of primers and output primer plate. Pablo Carbonell, SYNBIOCHEM, 2019')
-    parser.add_argument('-iceServer', default="http://ice.synbiochem.co.uk",
+    parser.add_argument('-iceServer', default=os.getenv('ICE_SERVER'),
                         help='ICE server url.')
     parser.add_argument('-iceUser', default=os.getenv('ICE_USERNAME'), 
                         help='ICE user.')
