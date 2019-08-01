@@ -5,7 +5,7 @@
 	#if $input_type == 'true':
 	   -plate $input6 
 	#end if 
-	-plasmids $input7 -output $output1
+	-plasmids $input7 -output $output1 -tempFolder $output1.extra_files_path
     ]]></command>
     <inputs>
     	<param name="input4" type="text" label="Restriction enzymes" value="MlyI"
