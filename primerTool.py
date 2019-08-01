@@ -27,7 +27,6 @@ def configureTool(args):
         plate =  'None' 
         df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
-    icelist = ' '.join( [ icelist[0] ] )
     with open( template ) as hin, open( script, 'w' ) as hout:
         for line in hin:
             line = re.sub( '{{enzymes}}', args.enzymes, line )
