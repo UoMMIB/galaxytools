@@ -17,6 +17,8 @@ import shutil
 
 def configureTool(args):
     template = os.path.join( os.path.dirname(  __file__), 'primers.sh' )
+    if not os.path.exists( args.tempFolder ):
+       os.makedirs( args.tempFolder )
     script = os.path.join( args.tempFolder, 'job.sh' )
     log = os.path.join( args.tempFolder, 'log.sh' )
     if args.plate is not None:
