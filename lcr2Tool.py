@@ -22,10 +22,7 @@ def configureTool(args):
     script = os.path.join( args.tempFolder, 'job.sh' )
     log = os.path.join( args.tempFolder, 'log.sh' )
     if args.plate is not None:
-        plate = args.plate 
-    else:
-        plate =  'None' 
-        df = pd.read_csv(args.plasmids)
+    df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
     icelist = ' '.join( icelist )
     with open( template ) as hin, open( script, 'w' ) as hout:
