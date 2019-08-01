@@ -4,7 +4,7 @@
 Created on Tue Mar 19 09:29:08 2019
 
 @author: Pablo Carbonell, SYNBIOCHEM
-@description: Run the primer generation.
+@description: Run the primers generation.
 """
 import argparse
 import pandas as pd
@@ -13,6 +13,27 @@ import os
 import re
 import subprocess
 import shutil
+
+
+def configureTool(args):
+    template = os.path.join( os.path.dirname(  __file__), 'primers.sh' )
+    script = os.path.join( args.tempFolder, 'job.sh' )
+    log = os.path.join( args.tempFolder, 'log.sh' )
+    if args.plate is not None:
+        plate = args.plate 
+    else:
+        plate =  'None' 
+            df = pd.read_csv(args.plasmids)
+    icelist = [str(x) for x in df['ICE']]
+    icelist = ' '.join( icelist[0] )
+    with open( template ) as hin, open( script, 'w' ) as hout:
+        for line in hin:
+            line = re.sub( '{{enzymes}}', args.enzymes )
+            line = re.sub( '{{temp}}', args.temp )
+            line = re.sub( '{{plates}}', plates )
+            line = re.sub( '{{plasmids}}', icelist )
+            hout.write( line )
+    return script, log
 
 def arguments():
     parser = argparse.ArgumentParser(description='Read list of primers and output primer plate. Pablo Carbonell, SYNBIOCHEM, 2019')
@@ -32,24 +53,18 @@ def arguments():
                         help='Plasmid csv file.')
     parser.add_argument('-output', 
                         help='Output csv file.')
+    parser.add_argument('-tempFolder'
+                        help='Tool temporary folder.')
     return parser
 
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    os.chdir(os.path.join( os.path.dirname(__file__), 'sbc-assembly') )
-    cmd = ["python", 'assembly/app/lcr2/primers.py', args.iceServer, args.iceUser,
-           args.icePass, args.enzymes, args.temp]
-    if args.plate is not None:
-        cmd.append( args.plate )
-    else:
-        cmd.append( 'None' )
-    df = pd.read_csv(args.plasmids)
-    icelist = [str(x) for x in df['ICE']]
-    icelist = [icelist[0]]
-    for ice in icelist:
-        cmd.append( ice )
-    subprocess.call( cmd )
+    script, logout = configureTool( args )
+    print('Running primers script...')
+    subprocess.call(( "bash "+script, shell=True, stdout=logout, stderr=logout )
+    print('Done.')
+    os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
     outfile1 = 'primer_1_primer_phospho.csv'
     outfile2 = 'primer_1_primer_nonphospho.csv'
     if os.path.exists( outfile1 ):
@@ -57,5 +72,4 @@ if __name__ == '__main__':
         os.unlink( outfile1 )
     if os.path.exists( outfile2 ):
         os.unlink( outfile2 )
-    os.chdir( '..' )
         
