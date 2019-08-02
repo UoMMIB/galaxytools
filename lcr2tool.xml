@@ -1,5 +1,5 @@
 <tool id="lcr2tool" name="LCR2Tool" version="0.1.0">
-    <description>generate work list from list of plasmids.</description>
+    <description>generate work list from list of plasmids TO DO: Select plates.</description>
     <command detect_errors="exit_code"><![CDATA[
         python3 $__tool_directory__/lcr2Tool.py -plasmids $input1 -output $output1 -tempFolder $output1.extra_files_path
     ]]></command>

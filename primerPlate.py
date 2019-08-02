@@ -72,8 +72,6 @@ def makePlate(wells, outfile):
         if firstWell:
             last = sorted(well,key=lambda x: sortWell(x) )[-1]
             firstWell = False
-    import pdb
-    pdb.set_trace()
     with open(outfile,'w') as h:
         cw = csv.writer( h )
         cw.writerow( ['well','id'] )
