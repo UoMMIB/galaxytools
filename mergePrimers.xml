@@ -1,7 +1,7 @@
 <tool id="mergeprimers" name="mergePrimers" version="0.1.0">
     <description>merge primers into a single file for ordering.</description>
     <command detect_errors="exit_code"><![CDATA[
-        python3 $__tool_directory__/mergePrimers.py -i $design1 
+        python3 $__tool_directory__/mergePrimers.py -i $input1 
         #for $q in $queries
             -i ${q.input2}
         #end for
