@@ -18,8 +18,8 @@ def readPlate(df):
     sn = 'Sequence Name'
     sn2 = 'Name'
     sequence = 'Sequence'
-    try: 
-        wp in df.columns and (sn in df.columns or sn2 in df.columns) and sequence in df.columns
+    try:
+        assert wp in df.columns and (sn in df.columns or sn2 in df.columns) and sequence in df.columns
     except:
         raise Exception('Unknown columns')
     for ix in df.index:
@@ -51,9 +51,10 @@ def nextPos( pos ):
         npos = 'A' + str(col+1)
     return npos
 
-def makePlate(wells, outfile):
+def makePlate(wells):
     """ Take the first plate as it is and continue moving in the plate from there """
     plate = {}
+    iplate = {}
     firstWell = True
     done = set()
     for well in wells:
@@ -67,17 +68,13 @@ def makePlate(wells, outfile):
                 npos = nextPos( last )
             else:
                 npos = pos
-            plate[npos] = well[pos]+'_P'
+            plate[npos] = well[pos]
+            iplate[ well[pos] ] = npos
             last = npos
         if firstWell:
             last = sorted(well,key=lambda x: sortWell(x) )[-1]
             firstWell = False
-    with open(outfile,'w') as h:
-        cw = csv.writer( h )
-        cw.writerow( ['well','id'] )
-        for pos in sorted( plate,key= lambda x: sortWell(x,byRow=False) ):
-            cw.writerow( [pos, plate[pos] ] )
-    return
+    return plate, iplate
         
 
 def arguments():
@@ -101,10 +98,8 @@ if __name__ == '__main__':
             wells.append ( readPlate(df) )
         else:
             raise Exception('File not found')
+    plate, iplate = makePlate( wells )
     iwell = {}
-    for well in wells:
-        for pos in well:
-            iwell[ well[pos] ] = pos
     w = set()
     with open(args.output, 'w') as h:
         cw = csv.writer(h)
@@ -118,7 +113,7 @@ if __name__ == '__main__':
             for row in cv:
                 rid = row[1].split('_')[0]
                 if row[1] not in w:
-                    row[0] = iwell[ rid ]
+                    row[0] = iplate[ rid ]
                     cw.writerow( row )
                 w.add( row[1] )
         
