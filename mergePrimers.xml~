@@ -1,0 +1,18 @@
+<tool id="mergeprimers" name="PlasmidInfo" version="0.1.0">
+    <description>get plasmid list for a given design.</description>
+    <command detect_errors="exit_code"><![CDATA[
+        python3 $__tool_directory__/plasmidInfo.py -i $design1 
+        -o $output1 
+    ]]></command>
+    <inputs>
+    	<param name="design1" type="text" label="Design id" value="SBCDE00053" help="SBC design id" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="csv" from_work_dir="out.csv" />
+    </outputs>
+    <help><![CDATA[
+    Plasmid info tool.
+    - Input file (csv).
+    - Output file (csv).
+    ]]></help>
+</tool>
