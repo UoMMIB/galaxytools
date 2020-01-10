@@ -42,7 +42,7 @@ if __name__ == '__main__':
     info = []
     for design in args.input:
         f = os.path.join('Designs', design, 'Design', design+'_export_mapping.csv')
-        if args.r:
+        if args.remote:
             r = getSBCfileURL(f)
         else:
             r = getSBCfileShared(f)
