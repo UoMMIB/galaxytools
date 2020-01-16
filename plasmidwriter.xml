@@ -1,0 +1,15 @@
+<tool id="plasmidwriter" name="PlasmidWriter" version="0.1.0">
+    <description>writes plamids in ICE.</description>
+    <command detect_errors="exit_code"><![CDATA[
+        python3 $__tool_directory__/plasmidWriter.py -in $input1 
+    ]]></command>
+    <inputs>
+      <param name="input1" type="data" label="Plasmid list" help="Plasmid list" format="csv"/>
+    </inputs>
+    <outputs>
+        <data name="output1" format="csv" from_work_dir="out.csv" />
+    </outputs>
+    <help><![CDATA[
+    Plasmid writer tool.
+    ]]></help>
+</tool>

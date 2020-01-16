@@ -1,13 +1,12 @@
 <tool id="doe2libtool" name="DoE2LibTool" version="0.1.0">
   <description>Generate combinatorial parts library from DoE instructions.</description>
     <command detect_errors="exit_code"><![CDATA[
-    python3 $__tool_directory__/code/sbc-doe/doepy.py $input1 $input2 -j $input3 -v "DoE Template" -o -b -r -V -bro;
-    python3 $__tool_directory__/design2doeTool.py $input1 $input2 $output1 $output2
+    python3 $__tool_directory__/design2doeTool.py $input1 $input2 $input3 $output1 $output2
     ]]></command>
     <inputs>
     	<param name="input1" type="data" format="xlsx" label="Design sheet"
 	       help="Design plan sheet" />
-    	<param name="input2" type="text" label="Library name" help="Library name" />
+    	<param name="input2" type="text" label="Library name" value="SBCDE" help="Library name" />
     	<param name="input3" type="data" format="txt" label="Library" help="Combinatorial library" />
     </inputs>
     <outputs>
