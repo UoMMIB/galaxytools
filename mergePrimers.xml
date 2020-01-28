@@ -19,5 +19,17 @@
     </outputs>
     <help><![CDATA[
     Merge primers.
+        
+    - Inputs:
+        - Primer files: *csv* file(s) with the list(s) of primers.
+
+    - Outputs:
+        - *csv* file with the merged list of primers.
+    
+.. class:: infomark
+
+Pablo Carbonell, SYNBIOCHEM, University of Manchester, 2020.
+
+
     ]]></help>
 </tool>

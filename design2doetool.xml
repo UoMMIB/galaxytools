@@ -12,6 +12,26 @@
         <data name="output1" format="txt" from_work_dir="out1.jsl" />
     </outputs>
     <help><![CDATA[
-    Generate DoE instructions from a Design sheet.
+    Generate Design of Experiments (DoE) instructions from a **Design sheet**.
+
+    - Inputs:    
+        - Design sheet: an *xlsx* file with the following columns:
+
+            - DoE position: position in the construct. i.e. 1,2,3..
+            - DoE permutation class: 1 if the gene position can be rearranged.
+	    - DoE designation: origin, resistance, promoter or gene.
+	    - Part number: SBC identifier or '-' for empty promoter
+	    - Name: part name.	    
+
+	 - Library size: desired size of the library.  
+
+     - Outputs:
+         - JMP script instructions in order to generate the combinatorial library.
+
+	 
+.. class:: infomark
+
+Pablo Carbonell, SYNBIOCHEM, University of Manchester, 2020.
+     
     ]]></help>
 </tool>
