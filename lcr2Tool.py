@@ -41,9 +41,11 @@ def arguments():
     parser.add_argument('-plasmids', 
                         help='Plasmid csv file.')
     parser.add_argument('-output', 
-                        help='Output csv file.')
+                        help='Output zip file.')
     parser.add_argument('-tempFolder',
                         help='Tool temporary folder.')
+    parser.add_argument('-plates', action="append",
+                        help='Plate files (csv or xlsx).')    
     return parser
 
 if __name__ == '__main__':

@@ -5,6 +5,9 @@
         #for $q in $queries
             -i ${q.input2}
         #end for
+        #for $q in $queries2
+            -x ${q.input3}
+        #end for
         -o $output1 
     ]]></command>
     <inputs>
@@ -12,13 +15,27 @@
         <repeat name="queries" title="Additional primers">
             <param name="input2" type="data" label="Primer file" format="csv" />
         </repeat>
+        <repeat name="queries2" title="Plate files">
+            <param name="input3" type="data" label="Plate file" format="csv" />
+        </repeat>
     </inputs>
     <outputs>
         <data name="output1" format="csv" from_work_dir="out.csv" />
     </outputs>
     <help><![CDATA[
-    Primer plate tool.
-    - Input file (csv).
-    - Output file (csv).
+
+        Convert primer files into the primer plate for worklist generation.
+        
+    - Inputs:
+            - Primer files: *csv* file(s) with the list(s) of primers.
+            - Plate files: *csv* or *xlsx* file(s) with plate information. **Feature not implemented**
+
+    - Outputs:
+        - *csv* file with the merged list of primers.
+    
+.. class:: infomark
+
+Pablo Carbonell, SYNBIOCHEM, University of Manchester, 2020.
+
     ]]></help>
 </tool>

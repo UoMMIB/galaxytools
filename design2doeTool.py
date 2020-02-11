@@ -29,6 +29,7 @@ def arguments():
     parser.add_argument('lib', help='Combinatorial library file')
     parser.add_argument('output', help='Output diagram file')
     parser.add_argument('output2', help='Output zip file')
+    parser.add_argument('output3', help='Output txt file')
     return parser
 
 if __name__ == '__main__':
@@ -38,7 +39,9 @@ if __name__ == '__main__':
         os.unlink(f)
     doepy( arg.input, arg.name, arg.lib )
     pdf = os.path.join( os.path.dirname(arg.input), arg.name + '.pdf' )
+    txt = os.path.join( os.path.dirname(arg.input), arg.name + '.txt' )
     shutil.copy( pdf, arg.output )
+    shutil.copy( txt, arg.output3 )
     with zipfile.ZipFile( arg.output2, 'w' ) as myzip:
         for f in glob.glob( os.path.join(os.path.dirname(arg.input),arg.name+'.*') ):
             myzip.write( f,arcname=os.path.basename(f) )

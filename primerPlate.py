@@ -86,8 +86,8 @@ def arguments():
                         help='Input csv file.')
     parser.add_argument('-o', '--output', 
                         help='Output csv file.')
-    parser.add_argument('-x', '--plates', 
-                        help='Output csv file.')
+    parser.add_argument('-x', '--plates', action="append", 
+                        help='Input plate files.')
     return parser
 
 if __name__ == '__main__':
