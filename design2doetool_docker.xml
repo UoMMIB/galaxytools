@@ -1,0 +1,38 @@
+<tool id="d2doetool (docker)" name="Design2DoETool (docker)" version="0.1.0">
+    <description>Generate DoE instructions from a Design sheet.</description>
+    <command detect_errors="exit_code"><![CDATA[
+            python /code/sbc-doe/doe2jmp.py -r -e -t -input $input1 -o $output1 $input2
+#            python3 $__tool_directory__/code/sbc-doe/doe2jmp.py -r -e -t -input $input1 -o $output1 $input2 
+    ]]></command>
+    <inputs>
+    	<param name="input1" type="data" format="xlsx" label="Design sheet"
+	       help="Design plan sheet" />
+    	<param name="input2" type="integer" label="Library size" value="48" help="Library size" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="txt" from_work_dir="out1.jsl" />
+    </outputs>
+    <help><![CDATA[
+    Generate Design of Experiments (DoE) instructions from a **Design sheet**.
+
+    - Inputs:    
+        - Design sheet: an *xlsx* file with the following columns:
+
+            - DoE position: position in the construct. i.e. 1,2,3..
+            - DoE permutation class: 1 if the gene position can be rearranged.
+	    - DoE designation: origin, resistance, promoter or gene.
+	    - Part number: SBC identifier or '-' for empty promoter
+	    - Name: part name.	    
+
+	 - Library size: desired size of the library.  
+
+     - Outputs:
+         - JMP script instructions in order to generate the combinatorial library.
+
+	 
+.. class:: infomark
+
+Pablo Carbonell, SYNBIOCHEM, University of Manchester, 2020.
+     
+    ]]></help>
+</tool>
