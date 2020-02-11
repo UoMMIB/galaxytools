@@ -1,4 +1,7 @@
 <tool id="d2doetool (docker)" name="Design2DoETool (docker)" version="0.1.0">
+  <requirements>
+    <container type="docker">sbc1</container>
+  </requirements>
     <description>Generate DoE instructions from a Design sheet.</description>
     <command detect_errors="exit_code"><![CDATA[
             python /code/sbc-doe/doe2jmp.py -r -e -t -input $input1 -o $output1 $input2
