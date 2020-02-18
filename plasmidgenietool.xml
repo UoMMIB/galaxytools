@@ -5,7 +5,7 @@
     <description>generate order list and plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
             cd $__tool_directory__/code/PlasmidGenieClient; 
-	    python plasmid_genie/client.py $ice.input2 $ice.input3 $ice.input4 $input6 $input1 $output1 $input5
+	    python plasmid_genie/client.py $ice.input2 $ice.input3 $ice.input4 $ice.input6 $input1 $output1 $input5
     ]]></command>
     <inputs>
     	<param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="txt"/>
