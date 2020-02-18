@@ -14,7 +14,13 @@
 	 <section name="ice" title="ICE Options" expanded="false">
     	   <param name="input2" type="text" label="ICE Server" help="ICE registry server" 
 		  value="http://ice.synbiochem.co.uk"/>
-    	   <param name="input3" type="text" label="ICE User" help="ICE user name"/>
+    	   <param name="input3" type="text" label="ICE User" help="ICE user name">
+	     <sanitizer invalid_char="">
+               <valid initial="string.ascii_letters,string.digits,string.punctuation">
+		 <add value="_" />
+               </valid>
+	     </sanitizer>
+	   </param>
     	   <param name="input4" type="text" label="ICE Pass" help="ICE login"/>
 	   <param name="input6" type="text" label="ICE Group" help="ICE Group" value="synbiochem"/>
 	</section>
