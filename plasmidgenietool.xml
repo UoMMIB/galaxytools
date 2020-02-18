@@ -4,7 +4,7 @@
   </requirements>
     <description>generate order list and plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
-            cd $__tool_directory__/code/PlasmidGenieClient; export PYTHONPATH=$PYTHONPATH:${PWD};
+            cd $__tool_directory__/code/PlasmidGenieClient; 
 	    python plasmid_genie/client.py $input2 $input3 $input4 $input6 $input1 $output1 $input5
     ]]></command>
     <inputs>
@@ -22,6 +22,9 @@
     <outputs>
         <data name="output1" format="csv" from_work_dir="out.zip" />
     </outputs>
+    <environment_variables>
+      <environment_variable name="PYTHONPATH">$__tool_directory__/code/PlasmidGenieClient</environment_variable>
+    </environment_variables>
     <help><![CDATA[
     PlasmidGenie: generate plasmids, parts and oligos list for a given combinatorial library.
 
