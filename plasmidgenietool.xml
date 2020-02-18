@@ -5,13 +5,13 @@
     <description>generate order list and plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
             cd $__tool_directory__/code/PlasmidGenieClient; 
-	    python plasmid_genie/client.py $input2 $input3 $input4 $input6 $input1 $output1 $input5
+	    python plasmid_genie/client.py $ice.input2 $ice.input3 $ice.input4 $input6 $input1 $output1 $input5
     ]]></command>
     <inputs>
     	<param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="txt"/>
     	<param name="input5" type="text" label="Restriction enzymes" value="MlyI"
 	       help="Comma separated restriction enzymes" />
-	 <section name="adv" title="ICE Options" expanded="false">
+	 <section name="ice" title="ICE Options" expanded="false">
     	   <param name="input2" type="text" label="ICE Server" help="ICE registry server" 
 		  value="https://ice.synbiochem.co.uk"/>
     	   <param name="input3" type="text" label="ICE User" help="ICE user name"/>
