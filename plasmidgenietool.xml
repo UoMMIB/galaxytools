@@ -4,7 +4,7 @@
   </requirements>
     <description>generate order list and plasmids.</description>
     <command detect_errors="exit_code"><![CDATA[
-            cd $__tool_director__/code/PlasmidGenieClient; export PYTHONPATH=$PYTHONPATH:${PWD};
+            cd $__tool_directory__/code/PlasmidGenieClient; export PYTHONPATH=$PYTHONPATH:${PWD};
 	    python plasmid_genie/client.py $input2 $input3 $input4 $input6 $input1 $output1 $input5
     ]]></command>
     <inputs>
