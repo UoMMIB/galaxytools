@@ -13,10 +13,10 @@
 	       help="Comma separated restriction enzymes" />
 	 <section name="adv" title="ICE Options" expanded="false">
     	   <param name="input2" type="text" label="ICE Server" help="ICE registry server" 
-		  default="https://ice.synbiochem.co.uk"/>
+		  value="https://ice.synbiochem.co.uk"/>
     	   <param name="input3" type="text" label="ICE User" help="ICE user name"/>
-    	   <param name="input4" type="text" label="ICE Pass" help="ICE login"/>
-	   <param name="input6" type="text" label="ICE Group" help="ICE Group"/>
+    	   <param name="input4" type="hidden" label="ICE Pass" help="ICE login"/>
+	   <param name="input6" type="text" label="ICE Group" help="ICE Group" value="synbiochem"/>
 	</section>
     </inputs>
     <outputs>
