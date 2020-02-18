@@ -8,7 +8,7 @@
 	    python plasmid_genie/client.py $input2 $input3 $input4 $input6 $input1 $output1 $input5
     ]]></command>
     <inputs>
-    	<param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="csv"/>
+    	<param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="txt"/>
     	<param name="input5" type="text" label="Restriction enzymes" value="MlyI"
 	       help="Comma separated restriction enzymes" />
 	 <section name="adv" title="ICE Options" expanded="false">
