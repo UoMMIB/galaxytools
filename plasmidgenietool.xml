@@ -1,0 +1,37 @@
+<tool id="plasmidgenietool" name="Plasmid Genie Tool" version="0.1.0">
+  <requirements>
+    <container type="docker">sbc1</container>
+  </requirements>
+    <description>generate order list and plasmids.</description>
+    <command detect_errors="exit_code"><![CDATA[
+            python $__tool_director__/code/    
+            python3 $__tool_directory__/lcr2Tool.py -plasmids $input1 -output $output1 -tempFolder $output1.extra_files_path
+        #for $q in $queries2
+            -plates ${q.input3}
+        #end for
+
+    ]]></command>
+    <inputs>
+    	<param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="csv"/>
+        <repeat name="queries2" title="Plate files">
+            <param name="input3" type="data" label="Plate file" format="csv" />
+        </repeat>
+    </inputs>
+    <outputs>
+        <data name="output1" format="csv" from_work_dir="out.csv" />
+    </outputs>
+    <help><![CDATA[
+    LCR tool: generate work list generation for Ligase Cycling Reaction (LCR) from list of plasmids 
+
+    - Inputs:
+            - Plasmids: *csv* file(s) with the list(s) of plasmids.
+            - Plate files: *csv* or *xlsx* file(s) with plate information. **Feature not implemented**
+
+    - Outputs:
+        - *csv* file with the merged list of primers.
+    
+.. class:: infomark
+
+Pablo Carbonell, SYNBIOCHEM, University of Manchester, 2020.
+    ]]></help>
+</tool>
