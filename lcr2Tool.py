@@ -13,10 +13,31 @@ import os
 import re
 import subprocess
 import shutil
+import zipfile
+import glob
 
+def localTool(source,target,plates):
+    """ LCR2 requires having in data/plates the appropriate plates
+    for the current parts. Here the strategy is to copy the source
+    code and replace data/plates with user's plates
+    """
+    shutil.copytree(source, target)
+    if plates is not None:
+        """ If plates is empty, take the default plates,
+        otherwise, replace the plate files"""
+        ppath = os.path.join(target,'data','plates')
+        for p in glob.glob(os.path.join(ppath, '*')):
+            os.unlink(p)
+        for p in plates:
+            if zipfile.is_zipfile(p):
+                with zipfile.Zipfile(p) as myzip:
+                    zipfile.extractall(path=ppath)
+            else:
+                shutil.copy(p,ppath)
 
 def configureTool(args):
-    template = os.path.join( os.path.dirname(  __file__), 'lcr2.sh' )
+    """ Configure a local LCR2 tool based on the template """
+    template = os.path.join( os.path.dirname(  __file__), 'lcr2_job.sh' )
     if not os.path.exists( args.tempFolder ):
        os.makedirs( args.tempFolder )
     script = os.path.join( args.tempFolder, 'job.sh' )
@@ -27,7 +48,11 @@ def configureTool(args):
     with open( template ) as hin, open( script, 'w' ) as hout:
         for line in hin:
             line = re.sub( '{{plasmids}}', icelist, line )
+            line = re.sub( '{{path}}', args.tempFolder, line )
             hout.write( line )
+    source = os.path.getenv('SBC_ASSEMBLY_PATH')
+    target = args.tempFolder
+    locaTool(source,target,args.plates)
     return script, log
 
 def arguments():
@@ -45,7 +70,7 @@ def arguments():
     parser.add_argument('-tempFolder',
                         help='Tool temporary folder.')
     parser.add_argument('-plates', action="append",
-                        help='Plate files (csv or xlsx).')    
+                        help='Plate files (csv or xlsx or zip).')    
     return parser
 
 if __name__ == '__main__':

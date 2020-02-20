@@ -2,12 +2,15 @@
 <tool id="lcr2tool" name="LCR2 Assembly Tool" version="0.1.0">
   <description>generate order list and plasmids.</description>
   <command detect_errors="exit_code"><![CDATA[
-  docker run -v $__tool_directory__:/tools -v  /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -p 80:80 -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT=$output1 sbc1 sh /tools/lcr2_job.sh 
+  docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -p 80:80 -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT=$output1 sbc1 python lcr2Tool.py -plasmids $input1 -output $output1 -tempFolder /tmp
+        #for $q in $queries2
+            -plates ${q.input3}
+        #end for
   ]]></command>
   <inputs>
-    <param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="csv,zip"/>
-        <repeat name="queries2" title="Plate files (zip,csv)">
-            <param name="input3" type="data" label="Plate file" format="csv,zip" />
+    <param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="csv"/>
+        <repeat name="queries2" title="Plate files (zip,csv,xlsx)">
+            <param name="input3" type="data" label="Plate file" format="csv,zip,xlsx" />
         </repeat>
     <section name="ice" title="ICE Options" expanded="false">
       <param name="input2" type="text" label="ICE Server" help="ICE registry server"
