@@ -1,4 +1,4 @@
-<tool id="d2doetool (docker)" name="Design2DoETool (docker)" version="0.1.0">
+<tool id="d2doetool" name="Design2DoETool (docker)" version="0.1.0">
   <requirements>
     <container type="docker">sbc1</container>
   </requirements>
