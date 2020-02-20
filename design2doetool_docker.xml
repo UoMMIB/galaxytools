@@ -1,4 +1,4 @@
-<tool id="d2doetool" name="Design2DoETool (docker)" version="0.1.0">
+<tool id="d2doetool_ddcker" name="Design2DoETool" version="0.1.0">
   <requirements>
     <container type="docker">sbc1</container>
   </requirements>
@@ -12,7 +12,7 @@
     	<param name="input2" type="integer" label="Library size" value="48" help="Library size" />
     </inputs>
     <outputs>
-        <data name="output1" format="txt" from_work_dir="out1.jsl" />
+        <data name="output1" format="txt" label="DoE recipe for ${input1.name}" from_work_dir="out1.jsl" />
     </outputs>
     <help><![CDATA[
     Generate Design of Experiments (DoE) instructions from a **Design sheet**.
