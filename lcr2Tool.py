@@ -15,6 +15,7 @@ import subprocess
 import shutil
 import zipfile
 import glob
+import tempfile
 
 def localTool(source,target,plates):
     """ LCR2 requires having in data/plates the appropriate plates
@@ -30,29 +31,33 @@ def localTool(source,target,plates):
             os.unlink(p)
         for p in plates:
             if zipfile.is_zipfile(p):
-                with zipfile.Zipfile(p) as myzip:
-                    zipfile.extractall(path=ppath)
+                with zipfile.ZipFile(p) as myzip:
+                    myzip.extractall(path=ppath)
             else:
                 shutil.copy(p,ppath)
 
 def configureTool(args):
     """ Configure a local LCR2 tool based on the template """
     template = os.path.join( os.path.dirname(  __file__), 'lcr2_job.sh' )
-    if not os.path.exists( args.tempFolder ):
-       os.makedirs( args.tempFolder )
-    script = os.path.join( args.tempFolder, 'job.sh' )
-    log = os.path.join( args.tempFolder, 'log.sh' )
+    if args.tempFolder is None:
+        tmpFolder = tempfile.mkdtemp()
+    else:
+        tmpFolder = args.tempFolder
+    if not os.path.exists( tmpFolder ):
+       os.makedirs( tmpFolder )
+    script = os.path.join( tmpFolder, 'job.sh' )
+    log = os.path.join( tmpFolder, 'log.sh' )
     df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
     icelist = ' '.join( icelist )
+    source = os.getenv('SBC_ASSEMBLY_PATH')
+    target = os.path.join( tmpFolder, os.path.basename(source) )
     with open( template ) as hin, open( script, 'w' ) as hout:
         for line in hin:
             line = re.sub( '{{plasmids}}', icelist, line )
-            line = re.sub( '{{path}}', args.tempFolder, line )
+            line = re.sub( '{{path}}', target, line )
             hout.write( line )
-    source = os.path.getenv('SBC_ASSEMBLY_PATH')
-    target = args.tempFolder
-    locaTool(source,target,args.plates)
+    localTool(source,target,args.plates)
     return script, log
 
 def arguments():
@@ -77,9 +82,8 @@ if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
     script, log = configureTool( args )
+    print(script)
     logout = open(log, 'w')
-    import pdb
-    pdb.set_trace()
     print('Running lcr2 script...')
     subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
