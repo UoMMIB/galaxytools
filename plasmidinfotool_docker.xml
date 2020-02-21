@@ -1,0 +1,31 @@
+<tool id="plasmidinfo" name="PlasmidInfo" version="0.1.0">
+  <requirements>
+    <container type="docker">sbc1</container>
+  </requirements>
+    <description>get plasmid list for a given design.</description>
+    <command detect_errors="exit_code"><![CDATA[
+        python3 $__tool_directory__/plasmidInfo.py -i $design1 
+        -o $output1 
+    ]]></command>
+    <inputs>
+    	<param name="design1" type="text" label="Design id" value="SBCDE00053" help="SBC design id" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="csv" from_work_dir="out.csv" />
+    </outputs>
+    <help><![CDATA[
+    Plasmid info for a given design.
+    
+    - Inputs:
+        - Design id: SBC design id.
+
+    - Outputs:
+        - *csv* file with the list of plasmid ids for the design.
+    
+.. class:: infomark
+
+Pablo Carbonell, SYNBIOCHEM, University of Manchester, 2020.
+
+
+	]]></help>
+</tool>

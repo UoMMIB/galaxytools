@@ -78,6 +78,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     script, log = configureTool( args )
     logout = open(log, 'w')
+    import pdb
+    pdb.set_trace()
     print('Running lcr2 script...')
     subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
