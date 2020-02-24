@@ -108,4 +108,4 @@ if __name__ == '__main__':
     subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
     # Zip the contents of the "out" folder into the output file
-    zipFilesInDir(os.path.join( os.path.dirname(target), 'out', args.output ))
+    zipFilesInDir(os.path.join( os.path.dirname(target), 'out'), args.output )
