@@ -16,6 +16,7 @@ import shutil
 import zipfile
 import glob
 import tempfile
+import shutil
 
 def localTool(source,target,plates):
     """ LCR2 requires having in data/plates the appropriate plates
@@ -35,6 +36,11 @@ def localTool(source,target,plates):
                     myzip.extractall(path=ppath)
             else:
                 shutil.copy(p,ppath)
+    """ Empty out folder """
+    outdir = os.path.join(target,'out')
+    shutil.rmtree(outdir)
+    if not os.path.exists(outdir):
+        os.mkdir(outdir)
 
 def configureTool(args):
     """ Configure a local LCR2 tool based on the template """
@@ -58,7 +64,19 @@ def configureTool(args):
             line = re.sub( '{{path}}', target, line )
             hout.write( line )
     localTool(source,target,args.plates)
-    return script, log
+    return script, log, target
+
+# Zip the files from given directory that matches the filter
+def zipFilesInDir(dirName, zipFileName):
+    # create a ZipFile object
+    with ZipFile(zipFileName, 'w') as zipObj:
+        # Iterate over all the files in directory
+        for folderName, subfolders, filenames in os.walk(dirName):
+            for filename in filenames:
+                # create complete filepath of file in directory
+                filePath = os.path.join(folderName, filename)
+                # Add file to zip
+                zipObj.write(filePath)
 
 def arguments():
     parser = argparse.ArgumentParser(description='Work list generation for Ligase Cycling Reaction (LCR). Pablo Carbonell, SYNBIOCHEM, 2019')
@@ -81,11 +99,12 @@ def arguments():
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    script, log = configureTool( args )
+    # Fill out template and create a tmp copy of the code with the plates 
+    script, log, target = configureTool( args )
     print(script)
     logout = open(log, 'w')
     print('Running lcr2 script...')
     subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
-    os.chdir(os.path.join( os.getenv( 'SBC_ASSEMBLY_PATH' ), 'out' ))
-    
+    # Zip the contents of the "out" folder into the output file
+    zipFilesInDir(os.path.join( os.path.dirname(target), 'out', args.output ))
