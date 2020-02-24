@@ -38,7 +38,8 @@ def localTool(source,target,plates):
                 shutil.copy(p,ppath)
     """ Empty out folder """
     outdir = os.path.join(target,'out')
-    shutil.rmtree(outdir)
+    if os.path.exists(outdir):
+        shutil.rmtree(outdir)
     if not os.path.exists(outdir):
         os.mkdir(outdir)
 
