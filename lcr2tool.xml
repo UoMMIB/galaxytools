@@ -2,7 +2,7 @@
 <tool id="lcr2tool" name="LCR2 Assembly Tool" version="0.1.0">
   <description>generate order list and plasmids.</description>
   <command detect_errors="exit_code"><![CDATA[
-  docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -p 80:80 -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT=$output1 sbc1 python lcr2Tool.py -plasmids $input1 -output $output1 
+  docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -p 80:80 -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT=$output1 sbc1 python /tools/lcr2Tool.py -plasmids $input1 -output $output1 
         #for $q in $queries2
             -plates ${q.input3}
         #end for
