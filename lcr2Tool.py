@@ -70,7 +70,7 @@ def configureTool(args):
 # Zip the files from given directory that matches the filter
 def zipFilesInDir(dirName, zipFileName):
     # create a ZipFile object
-    with ZipFile(zipFileName, 'w') as zipObj:
+    with zipfile.ZipFile(zipFileName, 'w') as zipObj:
         # Iterate over all the files in directory
         for folderName, subfolders, filenames in os.walk(dirName):
             for filename in filenames:
