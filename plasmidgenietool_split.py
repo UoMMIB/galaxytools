@@ -6,12 +6,12 @@ Created on Feb 2020
 @author: Pablo Carbonell, SYNBIOCHEM
 @description: Extract the plasmidgenie files
 """
-import pd
+import os
 import argparse
 import zipfile
 import shutil
 
-ef arguments():
+def arguments():
     parser = argparse.ArgumentParser(description='Split Plasmif Genie output. Pablo Carbonell, SYNBIOCHEM, 2019')
     parser.add_argument('--input',  
                         help='Input file.')
@@ -24,7 +24,7 @@ ef arguments():
 if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
-    os.basename(args.input)
+    os.path.basename(args.input)
     z = zipfile.ZipFile(args.input)
     for f in z.namelist():
         if f.endswith('_export.csv'):
