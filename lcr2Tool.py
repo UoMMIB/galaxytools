@@ -105,7 +105,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
     # Fill out template and create a tmp copy of the code with the plates 
     script, log, target = configureTool( args )
-    print(script)
     logout = open(log, 'w')
     print('Running lcr2 script...')
 #    subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
