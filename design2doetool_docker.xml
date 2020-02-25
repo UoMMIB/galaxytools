@@ -4,7 +4,7 @@
   </requirements>
     <description>Generate DoE instructions from a Design sheet.</description>
     <command detect_errors="exit_code"><![CDATA[
-            python $__tool_directory__/code/sbc-doe/doe2jmp.py -r -e -t -input $input1 -o $output1 $input2
+            python $__tool_directory__/code/sbc-doe/doe2jmp.py -r -t -input $input1 -o $output1 $input2
     ]]></command>
     <inputs>
     	<param name="input1" type="data" format="xlsx" label="Design sheet"
