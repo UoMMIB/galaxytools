@@ -107,7 +107,7 @@ if __name__ == '__main__':
     script, log, target = configureTool( args )
     logout = open(log, 'w')
     print('Running lcr2 script...')
-#    subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
+    subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
     # Zip the contents of the "out" folder into the output file
     zipFilesInDir(os.path.join( target, 'out'), args.output )
