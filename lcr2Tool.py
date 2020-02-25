@@ -27,13 +27,14 @@ def localTool(source,target,plates):
     if plates is not None:
         """ If plates is empty, take the default plates,
         otherwise, replace the plate files"""
-        ppath = os.path.join(target,'data','plates')
+        dpath = os.path.join(target,'data',)
+        ppath = os.path.join(dpath,'plates')
         for p in glob.glob(os.path.join(ppath, '*')):
             os.unlink(p)
         for p in plates:
             if zipfile.is_zipfile(p):
                 with zipfile.ZipFile(p) as myzip:
-                    myzip.extractall(path=ppath)
+                    myzip.extractall(path=dpath)
             else:
                 shutil.copy(p,ppath)
     """ Empty out folder """
