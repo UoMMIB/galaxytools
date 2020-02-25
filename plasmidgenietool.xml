@@ -4,7 +4,7 @@
   docker run -v $__tool_directory__:/tools -v  /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -e PLASMID_GENIE_PATH=/tools/code/PlasmidGenieClient -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT1=$output1 -e OUTPUT2=$output2 sbc1 sh /tools/plasmidgenie_job.sh 
   ]]></command>
   <inputs>
-    <param name="input1" type="data" label="Plasmids" help="Plasmid csv file" format="txt"/>
+    <param name="input1" type="data" label="Constructs" help="Plasmid csv file" format="txt"/>
     <param name="input5" type="text" label="Restriction enzymes" value="MlyI"
 	   help="Comma separated restriction enzymes" />
     <section name="ice" title="ICE Options" expanded="false">
