@@ -1,7 +1,7 @@
 <tool id="plasmidinfo1" name="PlasmidInfo" version="0.1.0">
     <description>get plasmid list for a given design.</description>
     <command detect_errors="exit_code"><![CDATA[
-  docker run -v $__tool_directory__:/tools -v  /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -p 80:80 -v /SynologyShared:/shared:ro  -e SBCDATA_SHARED=/shared -e DATA=/data sbc1 python /tools/plasmidInfo.py -i $design1 -o $output1 
+  docker run -v $__tool_directory__:/tools -v  /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -v /SynologyShared:/shared:ro  -e SBCDATA_SHARED=/shared -e DATA=/data sbc1 python /tools/plasmidInfo.py -i $design1 -o $output1 
     ]]></command>
     <inputs>
     	<param name="design1" type="text" label="Design id" value="SBCDE00053" help="SBC design id" />
