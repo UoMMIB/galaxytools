@@ -78,7 +78,9 @@ def zipFilesInDir(dirName, zipFileName):
                 # create complete filepath of file in directory
                 filePath = os.path.join(folderName, filename)
                 # Add file to zip
-                zipObj.write(filePath)
+                print(os.path.join(os.path.relpath(folderName, dirName), filename))
+                zipObj.write(filePath, arcname=os.path.join(os.path.relpath(folderName, dirName), filename))
+
 
 def arguments():
     parser = argparse.ArgumentParser(description='Work list generation for Ligase Cycling Reaction (LCR). Pablo Carbonell, SYNBIOCHEM, 2019')
@@ -106,7 +108,7 @@ if __name__ == '__main__':
     print(script)
     logout = open(log, 'w')
     print('Running lcr2 script...')
-    subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
+#    subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
     # Zip the contents of the "out" folder into the output file
-    zipFilesInDir(os.path.join( os.path.dirname(target), 'out'), args.output )
+    zipFilesInDir(os.path.join( target, 'out'), args.output )
