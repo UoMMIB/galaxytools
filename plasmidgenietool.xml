@@ -27,8 +27,8 @@
     </section>
   </inputs>
   <outputs>
-    <data name="output1" format="csv" label="Order list" />
-    <data name="output2" format="csv" label="Plasmids" />
+    <data name="output1" format="csv" label="Order list for ${input1.name}" />
+    <data name="output2" format="csv" label="Plasmid file for ${input1.name}" />
   </outputs>
   <environment_variables>
     <environment_variable name="PYTHONPATH">$__tool_directory__/code/PlasmidGenieClient</environment_variable>
