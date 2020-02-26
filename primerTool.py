@@ -66,7 +66,7 @@ if __name__ == '__main__':
     logout = open(log, 'w')
     print('Running primers script...')
     subprocess.call( ["cat",script])
-    subprocess.call( ["source",script], shell=True, stdout=logout, stderr=logout )
+    subprocess.call( [script], shell=True, stdout=logout, stderr=logout )
     print('Done.')
     os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
     # Output is generated sbc-assembly root folder, it would be better to make a local copy of the code
