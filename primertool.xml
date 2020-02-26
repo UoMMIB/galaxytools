@@ -39,10 +39,10 @@
 
     </inputs>
     <outputs>
-        <data name="output1" format="csv" from_work_dir="out.csv" />
+        <data name="output1" format="csv" from_work_dir="out.csv" label="Primers for ${input4.name}"/>
     </outputs>
     <help><![CDATA[
-    Primer tool: generates primer list from te list of plasmids in input files.
+    Primer tool: generates primer list from the list of plasmids in input files.
     
     - Inputs:
         - Restriction enzymes: comma separated restriction enzymes (MlyI, etc.).

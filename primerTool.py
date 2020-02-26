@@ -68,11 +68,13 @@ if __name__ == '__main__':
     subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
     os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
+    # Output is generated sbc-assembly root folder, it would be better to make a local copy of the code
     outfile1 = 'primer_1_primer_phospho.csv'
     outfile2 = 'primer_1_primer_nonphospho.csv'
     if os.path.exists( outfile1 ):
         shutil.copyfile( outfile1, args.output )
-        os.unlink( outfile1 )
-    if os.path.exists( outfile2 ):
-        os.unlink( outfile2 )
+#        os.unlink( outfile1 )
+    # Non phosphorylated primers are ignored
+#    if os.path.exists( outfile2 ):
+#        os.unlink( outfile2 )
         
