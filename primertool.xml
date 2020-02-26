@@ -1,23 +1,23 @@
 <tool id="primertool" name="PrimerTool" version="0.1.0">
     <description>generate primer list from the list of plasmids in input files.</description>
     <command detect_errors="exit_code"><![CDATA[
-      docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -v $__tool_data_path__:/tmp  -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT1=$output1 -e OUTPUT2=$output2 sbc1 python /tools/primerTool.py -enzymes $input4 -temp $input5 -iceServer $ice.input2 -iceUser $ice.input3 -icePass $ice.input4
+      docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -v $__tool_data_path__:/tmp  -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT1=$output1 -e OUTPUT2=$output2 sbc1 python /tools/primerTool.py -enzymes $input1 -temp $input2 -iceServer $ice.input2 -iceUser $ice.input3 -icePass $ice.input4
 	#if $input_type == 'true':
-	   -plate $input6 
+	   -plate $input3 
 	#end if 
-	-plasmids $input7 -output $output1 -tempFolder $output1.extra_files_path
+	-plasmids $input4 -output $output1 -tempFolder $output1.extra_files_path
     ]]></command>
     <inputs>
-    	<param name="input4" type="text" label="Restriction enzymes" value="MlyI"
+    	<param name="input1" type="text" label="Restriction enzymes" value="MlyI"
 	       help="Comma separated restriction enzymes" />
-    	<param name="input5" type="float" label="Melting temperature" value="60" help="Melting temperature" />
+    	<param name="input2" type="float" label="Melting temperature" value="60" help="Melting temperature" />
 	<conditional name="input_type">
 	  <param name="input_type_selector" type="boolean" label="Input existing plate file" />
 	  <when value="true">
-    	    <param name="input6" type="data" label="Existing plate file" help="Existing plate file" format="csv"/>
+    	    <param name="input3" type="data" label="Existing plate file" help="Existing plate file" format="csv"/>
 	  </when>
 	</conditional>
-    	<param name="input7" type="data" label="Plasmids" help="Plasmid csv file" format="csv"/>
+    	<param name="input4" type="data" label="Plasmids" help="Plasmid csv file" format="csv"/>
 	    <section name="ice" title="ICE Options" expanded="false">
 	      <param name="input2" type="text" label="ICE Server" help="ICE registry server"
 		     value="https://ice.synbiochem.co.uk"/>
