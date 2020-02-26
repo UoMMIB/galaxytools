@@ -1,7 +1,7 @@
 <tool id="primertool" name="PrimerTool" version="0.1.0">
     <description>generate primer list from the list of plasmids in input files.</description>
     <command detect_errors="exit_code"><![CDATA[
-      docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -v $__tool_data_path__:/tmp  -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 -e INPUT=$input1 -e OUTPUT1=$output1 -e OUTPUT2=$output2 sbc1 python /tools/primerTool.py -enzymes $input1 -temp $input2 -iceServer $ice.input2 -iceUser $ice.input3 -icePass $ice.input4
+      docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -v $__tool_directory__/data:/data -v $__tool_data_path__:/tmp  -e SBC_ASSEMBLY_PATH=/tools/code/sbc-assembly -e DATA=/data -e ICE_SERVER=$ice.input2 -e ICE_USERNAME=$ice.input3 -e ICE_PASSWORD=$ice.input4 -e ICE_GROUP=$ice.input6 sbc1 python /tools/primerTool.py -enzymes $input1 -temp $input2 -iceServer $ice.input2 -iceUser $ice.input3 -icePass $ice.input4
 	#if $input_type == 'true':
 	   -plate $input3 
 	#end if 
