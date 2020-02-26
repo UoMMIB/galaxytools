@@ -65,7 +65,6 @@ if __name__ == '__main__':
     script, log = configureTool( args )
     logout = open(log, 'w')
     print('Running primers script...')
-    subprocess.call( ["cat",script])
     os.chmod(script,777)
     subprocess.call( [script], shell=True, stdout=logout, stderr=logout )
     os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
@@ -74,8 +73,8 @@ if __name__ == '__main__':
     outfile2 = 'primer_1_primer_nonphospho.csv'
     if os.path.exists( outfile1 ):
         shutil.copyfile( outfile1, args.output )
-#        os.unlink( outfile1 )
+        os.unlink( outfile1 )
     # Non phosphorylated primers are ignored
-#    if os.path.exists( outfile2 ):
-#        os.unlink( outfile2 )
+    if os.path.exists( outfile2 ):
+        os.unlink( outfile2 )
         
