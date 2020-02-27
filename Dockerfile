@@ -22,6 +22,9 @@ RUN conda install six=1.10.0
 RUN conda install -c conda-forge sseclient=0.0.22
 RUN pip install synbiochem-py==0.6.18
 
+RUN conda install -c anaconda biopython
+RUN conda install -c bioconda blast
+
 RUN mkdir /code
 WORKDIR /code
 RUN git clone https://gitlab+deploy-token-2:cyFxC4ogMcKih6Ls97Uj@gitlab.cs.man.ac.uk/SYNBIOCHEM/sbc-doe.git
