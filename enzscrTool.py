@@ -4,7 +4,7 @@
 Created on Tue Mar 19 09:29:08 2019
 
 @author: Pablo Carbonell, SYNBIOCHEM
-@description: Run the LCR2 worklist generation.
+@description: Run the enzyme screening tools.
 """
 import argparse
 import pandas as pd
@@ -19,7 +19,7 @@ import tempfile
 import shutil
 
 def localTool(source,target,plates):
-    """ LCR2 requires having in data/plates the appropriate plates
+    """ enz_scr requires having in data/plates the appropriate plates
     for the current parts. Here the strategy is to copy the source
     code and replace data/plates with user's plates
     """
@@ -46,7 +46,7 @@ def localTool(source,target,plates):
 
 def configureTool(args):
     """ Configure a local LCR2 tool based on the template """
-    template = os.path.join( os.path.dirname(  __file__), 'lcr2_job.sh' )
+    template = os.path.join( os.path.dirname(  __file__), 'enz_scr_job.sh' )
     if args.tempFolder is None:
         tmpFolder = tempfile.mkdtemp()
     else:
@@ -90,7 +90,7 @@ def arguments():
                         help='ICE user.')
     parser.add_argument('-icePass', default=os.getenv('ICE_PASSWORD'),
                         help='ICE password.')
-    parser.add_argument('-plasmids', 
+    parser.add_argument('-assays', 
                         help='Plasmid csv file.')
     parser.add_argument('-output', 
                         help='Output zip file.')
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     # Fill out template and create a tmp copy of the code with the plates 
     script, log, target = configureTool( args )
     logout = open(log, 'w')
-    print('Running lcr2 script...')
+    print('Running enz_scr script...')
     subprocess.call( "bash "+script, shell=True, stdout=logout, stderr=logout )
     print('Done.')
     # Zip the contents of the "out" folder into the output file
