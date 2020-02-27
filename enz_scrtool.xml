@@ -41,9 +41,11 @@
 
     Inputs:
 
-    - Assays: csv file (see .. _template: https://github.com/neilswainston/sbc-assembly/blob/master/data/enz_scr/enz_scr.csv).
+    - Assays: csv file (see template_).
     - Plates: csv or zip file with plates inside "plates" folder.
     - ICE details.
+
+.. _template: https://github.com/neilswainston/sbc-assembly/blob/master/data/enz_scr/enz_scr.csv
 
     Outputs:
     
