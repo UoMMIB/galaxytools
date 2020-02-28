@@ -29,5 +29,14 @@
     </outputs>
     <help><![CDATA[
     Plasmid writer tool.
+    
+    Inputs:
+
+       - Plasmids list: csv file with columns part,vector.
+       - ICE details
+
+    Outputs:
+       - CSV file with plasmids details.
+    
     ]]></help>
 </tool>
