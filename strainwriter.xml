@@ -1,5 +1,5 @@
 <tool id="strainwriter" name="StrainWriter" version="0.1.0">
-    <description>writes strains in ICE.</description>
+    <description>Write strains in ICE.</description>
     <command detect_errors="exit_code"><![CDATA[
   docker run -v $__tool_directory__:/tools -v /export/galaxy-central/database/files:/export/galaxy-central/database/files:rw -v /export/galaxy-central/database/job_working_directory:/export/galaxy-central/database/job_working_directory:rw -w /tools/code/PartsGenie -e PYTHONPATH=:/tools/code/PartsGenie sbc1 python scripts/strain_writer.py $input1 $output1 $ice.server $ice.username $ice.pass $ice.group 
     ]]></command>

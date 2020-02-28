@@ -1,5 +1,8 @@
-<tool id="mergeprimers" name="mergePrimers" version="0.1.0">
-    <description>merge primers into a single file for ordering.</description>
+<tool id="mergeprimers" name="MergePrimers" version="0.1.0">
+    <requirements>
+    <container type="docker">sbc1</container>
+   </requirements>
+    <description>Merge primers into a single list for ordering.</description>
     <command detect_errors="exit_code"><![CDATA[
         python3 $__tool_directory__/mergePrimers.py -i $input1 
         #for $q in $queries

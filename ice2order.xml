@@ -1,4 +1,7 @@
 <tool id="ice2order" name="ICE2Order" version="0.1.0">
+      <requirements>
+	<container type="docker">sbc1</container>
+      </requirements>
     <description>Convert a zip file of ICE GenBank registries into an order list.</description>
     <command detect_errors="exit_code"><![CDATA[
         python3 $__tool_directory__/ice2order.py $input1 $output1
