@@ -8,8 +8,6 @@
     ]]></command>
     <inputs>
     	<param name="design1" type="text" label="Design id" value="SBCDE00053" help="SBC design id" />
-    </inputs>
-    <inputs>
     	<param name="synology" type="text" label="Synology" value="/SynologyShared" help="Synology shared mount point" />
     </inputs>
     <outputs>
