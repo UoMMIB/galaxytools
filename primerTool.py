@@ -27,14 +27,35 @@ def configureTool(args):
         plate =  'None' 
     df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
-    icelist = ' '.join( icelist )
-    with open( template ) as hin, open( script, 'w' ) as hout:
-        for line in hin:
-            line = re.sub( '{{enzymes}}', args.enzymes, line )
-            line = re.sub( '{{temp}}', args.temp, line )
-            line = re.sub( '{{plates}}', plate, line )
-            line = re.sub( '{{plasmids}}', icelist, line )
-            hout.write( line )
+    with open(args.output, 'w') as output:
+        for ice in icelist:
+    #    icelist = ' '.join( icelist )
+            with open( template ) as hin, open( script, 'w' ) as hout:
+                for line in hin:
+                    line = re.sub( '{{enzymes}}', args.enzymes, line )
+                    line = re.sub( '{{temp}}', args.temp, line )
+                    line = re.sub( '{{plates}}', plate, line )
+                    line = re.sub( '{{plasmids}}', ice, line )
+                    hout.write( line )
+            logout = open(log, 'w')
+            print('Running primers script...')
+            os.chmod(script,777)
+            subprocess.call( [script], shell=True, stdout=logout, stderr=logout )
+            os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
+            # Output is generated sbc-assembly root folder, it would be better to make a local copy of the code
+            outfile1 = 'primer_1_primer_phospho.csv'
+            outfile2 = 'primer_1_primer_nonphospho.csv'
+            if os.path.exists( outfile1 ):
+                with open(outfile1) as out1:
+                    for line in outfile1:
+                        output.write(line)
+                os.unlink( outfile1 )
+            # Non phosphorylated primers are ignored
+            if os.path.exists( outfile2 ):
+                os.unlink( outfile2 )
+
+
+
     return script, log
 
 def arguments():
