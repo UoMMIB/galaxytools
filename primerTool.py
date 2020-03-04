@@ -47,7 +47,7 @@ def configureTool(args):
             outfile2 = 'primer_1_primer_nonphospho.csv'
             if os.path.exists( outfile1 ):
                 with open(outfile1) as out1:
-                    for line in outfile1:
+                    for line in out1:
                         output.write(line)
                 os.unlink( outfile1 )
             # Non phosphorylated primers are ignored
