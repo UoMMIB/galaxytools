@@ -84,18 +84,19 @@ if __name__ == '__main__':
     parser = arguments()
     args = parser.parse_args()
     script, log = configureTool( args )
-    logout = open(log, 'w')
-    print('Running primers script...')
-    os.chmod(script,777)
-    subprocess.call( [script], shell=True, stdout=logout, stderr=logout )
-    os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
-    # Output is generated sbc-assembly root folder, it would be better to make a local copy of the code
-    outfile1 = 'primer_1_primer_phospho.csv'
-    outfile2 = 'primer_1_primer_nonphospho.csv'
-    if os.path.exists( outfile1 ):
-        shutil.copyfile( outfile1, args.output )
-        os.unlink( outfile1 )
-    # Non phosphorylated primers are ignored
-    if os.path.exists( outfile2 ):
-        os.unlink( outfile2 )
-        
+    if False:
+        logout = open(log, 'w')
+        print('Running primers script...')
+        os.chmod(script,777)
+        subprocess.call( [script], shell=True, stdout=logout, stderr=logout )
+        os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
+        # Output is generated sbc-assembly root folder, it would be better to make a local copy of the code
+        outfile1 = 'primer_1_primer_phospho.csv'
+        outfile2 = 'primer_1_primer_nonphospho.csv'
+        if os.path.exists( outfile1 ):
+            shutil.copyfile( outfile1, args.output )
+            os.unlink( outfile1 )
+        # Non phosphorylated primers are ignored
+        if os.path.exists( outfile2 ):
+            os.unlink( outfile2 )
+
