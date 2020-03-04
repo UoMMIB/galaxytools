@@ -79,7 +79,7 @@ def configureTool(args):
     with open(args.output, 'w') as output:
         for partid in sorted(seqs):
             for sense in sorted(seqs[partid]):
-                table.append( (pos, '_'.join(partid,sense),seqs[partid][sense]) )
+                table.append( (pos, '_'.join([partid,sense]),seqs[partid][sense]) )
             pos = nextPos(pos)
     df1 = pd.DataFrame( table,columns=primers.columns )
     df1.to_csv(args.output, index=False)
