@@ -38,7 +38,7 @@ def configureTool(args):
                     line = re.sub( '{{plasmids}}', ice, line )
                     hout.write( line )
             logout = open(log, 'w')
-            print('Running primers script...')
+            print('Running primers for plasmid',ice,'...')
             os.chmod(script,777)
             subprocess.call( [script], shell=True, stdout=logout, stderr=logout )
             os.chdir(os.getenv( 'SBC_ASSEMBLY_PATH' ))
