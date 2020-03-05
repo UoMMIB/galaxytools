@@ -42,6 +42,7 @@ def configureTool(args):
     df = pd.read_csv(args.plasmids)
     icelist = [str(x) for x in df['ICE']]
     # Loop through each plasmid to avoid connection issues
+    seqs = {}
     for ice in icelist:
 #    icelist = ' '.join( icelist )
         with open( template ) as hin, open( script, 'w' ) as hout:
@@ -59,7 +60,6 @@ def configureTool(args):
         # Output is generated sbc-assembly root folder, it would be better to make a local copy of the code
         outfile1 = 'primer_1_primer_phospho.csv'
         outfile2 = 'primer_1_primer_nonphospho.csv'
-        seqs = {}
         primers = pd.read_csv(outfile1)
         for i in primers.index:
             part = primers.loc[i,'Sequence Name']
