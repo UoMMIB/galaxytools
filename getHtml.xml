@@ -1,5 +1,8 @@
 <tool id="getHtml" name="produce list of plate options for selected parts" version="0.1.0">
   <description>takes ice ids for parts and gives a list of plate options</description>
+   <requirements>
+    <container type="docker">sbc1</container>
+  </requirements>
   <command>python '${__tool_directory__}/getHtml.py' '$input' '$ice.server' '$ice.username' '$ice.pass'</command>
 <inputs>
     <param name="input" type="text" value="SBC008019" optional="true" label="Text box" help="Some help"/>
