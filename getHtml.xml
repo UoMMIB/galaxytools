@@ -1,0 +1,38 @@
+<tool id="getHtml" name="produce list of plate options for selected parts" version="0.1.0">
+  <description>takes ice ids for parts and gives a list of plate options</description>
+  <command>python '${__tool_directory__}/getHtml.py' '$input' '$ice.server' '$ice.username' '$ice.pass'</command>
+<inputs>
+    <param name="input" type="text" value="SBC008019" optional="true" label="Text box" help="Some help"/>
+    <section name="ice" title="ICE Options" expanded="false">
+      <param name="server" type="text" label="ICE Server" help="ICE registry server"
+	     value="https://ice.synbiochem.co.uk"/>
+      <param name="username" type="text" label="ICE User" help="ICE user name">
+	<sanitizer invalid_char="">
+	  <valid initial="string.ascii_letters,string.digits,string.punctuation">
+	    <add value="_" />
+	  </valid>
+	</sanitizer>
+      </param>
+      <param name="pass" type="text" label="ICE Pass" help="ICE login"/>
+      <sanitizer invalid_char="">
+	<valid initial="string.ascii_letters,string.digits,string.punctuation">
+	  <add value="_" />
+	</valid>
+      </sanitizer>
+      <param name="group" type="text" label="ICE Group" help="ICE Group" value="synbiochem"/>
+    </section>
+</inputs>
+  <outputs>
+    <data format="html" name="output" />
+  </outputs>
+  <tests>
+    <test>
+      <output name="output" file="selectPlates.html"/>
+    </test>
+  </tests>
+
+  <help>
+This tool produces html.
+  </help>
+
+</tool>
